@@ -1,0 +1,23 @@
+.heading {
+	font-weight: normal;
+	font-size: 25px;
+	margin: 0 0 20px 0;
+}
+.subheading {
+	margin: 0 0 30px 0;
+	font-size: 14px;
+	display:flex;
+	align-items: center;
+}
+.tickIcon {
+	fill: #7DBC46;
+	margin-right: 4px;
+	width: 22px;
+	height: 22px;
+}
+.consensusClarifier {
+	font-size: 12px;
+}
+.explanatoryText {
+	font-size: 14px;
+}

@@ -1,0 +1,40 @@
+.presentation {
+	width: 100vw;
+	height: 100vh;
+	background: var(--presentation-background);
+	color: var(--primary-text);
+	padding: 50px 80px;
+	display: flex;
+	flex-direction: column;
+}
+.mainContainer {
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.main{
+	display: grid;
+	background: rgba(255,255,255,0.1);
+	width: 1100px;
+	height: 500px;
+	grid-template-columns: 3fr 4fr;
+	grid-template-rows: 1fr auto 30px;
+	grid-template-areas: "intro chart" "showDetails chart" ". chart";
+}
+.main > div {
+	margin: 10px;
+	
+}
+.introduction {
+	grid-area: intro;
+	background: rgba(255,0,0,0.1);
+}
+.details {
+	grid-area: showDetails;
+	background: rgba(0,255,0,0.1);
+}
+.chart {
+	grid-area: chart;
+	background: rgba(0,0,255,0.1);
+}

@@ -1,0 +1,39 @@
+.showDetails {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas: "poster title" "poster tags" "poster stats";
+}
+.poster {
+	grid-area: poster;
+	margin-right: 20px;
+	/* position: relative; */
+}
+.title {
+	grid-area: title;
+	font-weight: bold;
+	font-size: 20px;
+	margin-top: 0;
+}
+.tags {
+	grid-area: tags;
+	font-size: 14px;
+}
+.stats {
+	grid-area: stats;
+}
+.detailsRow {
+	display: flex;
+	align-items: center;
+}
+.detailsRow > svg {
+	width: 24px;
+	height: 24px;
+	margin-right: 5px;
+}
+.calendarIcon {
+	fill: #0974C3;
+}
+.starIcon {
+	fill: gold;
+}
