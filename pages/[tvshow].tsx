@@ -1,8 +1,8 @@
 import { GetStaticPropsContext } from "next";
 import Head from "next/head";
 import ShowPresentation from "../components/presentation/ShowPresentation";
-import getTVShow from "../lib/getTVShow";
-import { TVShow } from "../lib/transformTVShow";
+import getTVShow from "../lib/tv/getTVShow";
+import { TVShow } from "../lib/tv/types";
 
 //-----------------------
 export function getStaticPaths() {

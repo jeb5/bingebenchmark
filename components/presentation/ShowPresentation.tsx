@@ -2,7 +2,9 @@ import styles from "./ShowPresentation.module.css";
 import HeaderBar from "./HeaderBar";
 import ShowIntroduction from "./ShowIntroduction";
 import ShowDetails from "./ShowDetails";
-import { TVShow } from "../../lib/transformTVShow";
+import { TVShow } from "../../lib/tv/types";
+import ShowChart from "../ShowChart";
+import ShowChartContainer from "./ShowChartContainer";
 
 export default function ShowPresentation({ showDetails }: { showDetails: TVShow }) {
 	return (
@@ -13,13 +15,22 @@ export default function ShowPresentation({ showDetails }: { showDetails: TVShow 
 					<ShowIntroduction
 						className={styles.introduction}
 						showName={showDetails.name}
-						consensusExplanation={
-							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+						summary={
+							showDetails.analysis?.summary ??
+							`It looks like there is too little rating data to determine whether ${showDetails.name} gets better.`
 						}
-						showConsensus={"yes"}
+						showVerdict={
+							showDetails.analysis == null
+								? "unknown"
+								: showDetails.analysis?.verdict == "unknown"
+								? "unknown"
+								: showDetails.analysis?.verdict.overall
+						}
 					/>
 					<ShowDetails className={styles.details} showDetails={showDetails} />
-					<div className={styles.chart}></div>
+					<div className={styles.chart}>
+						{showDetails.rating_data !== null ? <ShowChartContainer showDetails={showDetails} /> : null}
+					</div>
 				</main>
 			</div>
 		</div>

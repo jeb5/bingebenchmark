@@ -25,15 +25,31 @@
 .detailsRow {
 	display: flex;
 	align-items: center;
+	margin-top: 5px;
+	font-size: 13px;
+	font-weight: bold;
 }
 .detailsRow > svg {
 	width: 24px;
 	height: 24px;
-	margin-right: 5px;
+	margin-right: 7px;
 }
 .calendarIcon {
 	fill: #0974C3;
 }
 .starIcon {
 	fill: gold;
+}
+
+.detailsRow span {
+white-space: pre;
+}
+.ratingOutOfSpan {
+	font-size: 10px;
+	font-weight: normal;
+}
+
+.ratingContainer {
+	display: flex;
+	align-items: baseline;
 }

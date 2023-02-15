@@ -1,0 +1,16 @@
+.chartControls {
+	margin-top: 30px;
+	display: flex;
+	gap: 10px;
+}
+.chartControls > .viewLargerBtn {
+	margin-left: auto;
+}
+.chart {
+	flex-grow: 1;
+}
+.showChartContainer{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}

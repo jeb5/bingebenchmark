@@ -5,8 +5,18 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
+}
+html {
 	--presentation-background: #1b1b1b;
 	--primary-text: #FFF7E3;
+	--green: #7DBC46;
+	--red: #C55858;
+	--blue: #0974C3;
+
+	--checkmark-color: var(--green);
+	--cross-color: var(--red);
+	--maybe-color: var(--blue);
+	--unknown-color: white; 
 }
 
 a {

@@ -1,10 +1,16 @@
-import getTVShow from "./getTVShow";
-import { ShowResponse, TvExternalIdsResponse } from "moviedb-promise";
-import { fetchRatingDataByIMDBID } from "./imdb";
+import knex from "./database";
+import { MovieDb, ShowResponse, TvExternalIdsResponse } from "moviedb-promise";
+import { ShowDetails } from "./types";
+
+type tmdbDBShowInfo = {
+	id: string;
+	original_name: string;
+	popularity: number;
+};
 
 type TMDBShow = ShowResponse & { external_ids: TvExternalIdsResponse } & { tagline?: string };
 
-interface ValidTMDBShow {
+type ValidTMDBShow = {
 	id: number;
 	name: string;
 	overview: string;
@@ -20,45 +26,34 @@ interface ValidTMDBShow {
 		imdb_id: string | null;
 		twitter_id: string | null;
 	};
+};
+
+export async function fetchTmdbIdByOriginalName(originalShowName: string) {
+	const result = await knex<tmdbDBShowInfo>("tmdb")
+		.where("original_name", originalShowName.toLowerCase())
+		.first()
+		.timeout(1000, { cancel: true });
+
+	return result?.id ?? null;
 }
 
-interface RatingData {
-	episode_ratings: {
-		season: number;
-		episode: number;
-		average_rating: number;
-		num_votes: number;
-	}[];
-	show_average_rating: number;
-	show_num_votes: number;
-}
+const tmdb = new MovieDb(process.env.TMDB_API_KEY!);
 
-export interface TVShow {
-	name: string;
-	overview: string;
-	first_air_year: string;
-	last_air_year: string | null;
-	poster_url: string;
-	genres: string[];
-	status: string;
+export async function fetchTmdbDetails(tmdbID: string) {
+	const result = await tmdb.tvInfo({ id: tmdbID, append_to_response: "external_ids" });
+	const tmdbShow = result as TMDBShow;
 
-	tmdb_id: string;
-	external_links: {
-		tmdb_link: string;
-		imdb_link: string | null;
-		twitter_link: string | null;
-	};
-
-	rating_data: RatingData | null;
-}
-
-export default function transformTVShow(tmdbShow: TMDBShow, rating: RatingData | null): TVShow {
-	if (!isValidTMDBShow(tmdbShow)) {
-		console.dir(tmdbShow);
+	if (isValidTMDBShow(tmdbShow)) {
+		return transformTMDBShow(tmdbShow);
+	} else {
 		throw new Error("Invalid TMDB response");
 	}
+}
+
+function transformTMDBShow(tmdbShow: ValidTMDBShow): ShowDetails {
 	return {
 		tmdb_id: tmdbShow.id.toString(),
+		imdb_id: tmdbShow.external_ids.imdb_id,
 		name: tmdbShow.name,
 		// rating_data: tmdbShow.rating_data,
 		overview: tmdbShow.overview,
@@ -72,7 +67,6 @@ export default function transformTVShow(tmdbShow: TMDBShow, rating: RatingData |
 			imdb_link: tmdbShow.external_ids.imdb_id ? `https://www.imdb.com/title/${tmdbShow.external_ids.imdb_id}` : null,
 			twitter_link: tmdbShow.external_ids.imdb_id ? `https://twitter.com/${tmdbShow.external_ids.twitter_id}` : null,
 		},
-		rating_data: rating,
 	};
 }
 

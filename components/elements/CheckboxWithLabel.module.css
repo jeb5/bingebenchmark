@@ -1,0 +1,9 @@
+.checkboxWithLabel {
+	font-size: 12px;
+}
+.checkboxWithLabel> input {
+	width: 12px;
+	height: 12px;
+	margin-right: 6px;
+	accent-color: #0974C3;
+}

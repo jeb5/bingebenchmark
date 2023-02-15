@@ -9,15 +9,26 @@
 	display:flex;
 	align-items: center;
 }
-.tickIcon {
-	fill: #7DBC46;
+.verdictIcon {
 	margin-right: 4px;
-	width: 22px;
-	height: 22px;
+	width: 17px;
+	height: 17px;
 }
-.consensusClarifier {
+.verdictIcon.checkmarkIcon{
+	fill: var(--checkmark-color);
+}
+.verdictIcon.crossIcon{
+	fill: var(--cross-color);
+}
+.verdictIcon.maybeIcon{
+	fill: var(--maybe-color);
+}
+.verdictIcon.questionIcon{
+	fill: var(--unknown-color);
+}
+.verdictClarifier {
 	font-size: 12px;
 }
-.explanatoryText {
+.summary {
 	font-size: 14px;
 }

@@ -1,4 +1,6 @@
-import knexConnector from "knex";
+import knexConnector, { Knex } from "knex";
+import pg from "pg";
+pg.types.setTypeParser(pg.types.builtins.NUMERIC, Number);
 
 const knex = knexConnector({
 	client: "pg",
