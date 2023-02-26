@@ -22,6 +22,7 @@ type ValidTMDBShow = {
 	}[];
 	status: string;
 	tagline: string | undefined;
+	number_of_episodes: number;
 	external_ids: {
 		imdb_id: string | null;
 		twitter_id: string | null;
@@ -62,6 +63,7 @@ function transformTMDBShow(tmdbShow: ValidTMDBShow): ShowDetails {
 		status: tmdbShow.status,
 		poster_url: `https://image.tmdb.org/t/p/original${tmdbShow.poster_path}`,
 		genres: tmdbShow.genres.map(genre => genre.name),
+		number_of_episodes: tmdbShow.number_of_episodes,
 		external_links: {
 			tmdb_link: `https://www.themoviedb.org/tv/${tmdbShow.id}`,
 			imdb_link: tmdbShow.external_ids.imdb_id ? `https://www.imdb.com/title/${tmdbShow.external_ids.imdb_id}` : null,
@@ -80,6 +82,7 @@ function isValidTMDBShow(tmdbShow: TMDBShow): tmdbShow is ValidTMDBShow {
 		Array.isArray(tmdbShow.genres) &&
 		typeof tmdbShow.status === "string" &&
 		(tmdbShow.tagline === undefined || typeof tmdbShow.tagline === "string") &&
+		typeof tmdbShow.number_of_episodes === "number" &&
 		(tmdbShow.external_ids.imdb_id === null || typeof tmdbShow.external_ids.imdb_id === "string") &&
 		(tmdbShow.external_ids.twitter_id === null || typeof tmdbShow.external_ids.twitter_id === "string")
 	);

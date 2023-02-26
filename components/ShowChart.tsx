@@ -170,7 +170,6 @@ export default function ShowChart({
 		},
 	};
 
-	// console.log(showDetails.analysis);
 	const seasonTrendlineData = useMemo(
 		() =>
 			showDetails.analysis?.trendlines != null

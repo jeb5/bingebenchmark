@@ -21,6 +21,7 @@ export type ShowDetails = {
 	last_air_year: string | null;
 	poster_url: string;
 	genres: string[];
+	number_of_episodes: number;
 	status: string;
 
 	tmdb_id: string;

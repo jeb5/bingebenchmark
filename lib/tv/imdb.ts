@@ -32,7 +32,7 @@ export async function fetchRatingDataByIMDBID(imdbId: string) {
 
 	const episodeRatings = episodeRatingResult.slice(
 		0,
-		episodeRatingResult.findLastIndex(({ average_rating }) => average_rating !== null)
+		episodeRatingResult.findLastIndex(({ average_rating }) => average_rating !== null) + 1
 	); //Removes trailing unrated episodes (unreleased seasons)
 
 	return {

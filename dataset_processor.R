@@ -83,3 +83,4 @@ con %>% dbWriteTable("tmdb", tmdb_clean, overwrite = T, field.types = c(
   popularity = "numeric(9,3)"
 ))
 con %>% dbExecute("CREATE INDEX IF NOT EXISTS tmdb_og_name ON tmdb (original_name)")
+

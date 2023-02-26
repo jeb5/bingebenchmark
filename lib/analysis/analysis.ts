@@ -6,7 +6,7 @@ import generateVerdict from "./verdict";
 
 export function generateAnalysis(ratingData: RatingData, showDetails: ShowDetails): Analysis {
 	const trendlines = generateTrendlines(ratingData);
-	const verdict = generateVerdict(ratingData, trendlines);
+	const verdict = generateVerdict(ratingData, trendlines, showDetails);
 	const summary = generateSummary(ratingData, trendlines, verdict, showDetails);
 
 	return {

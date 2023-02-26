@@ -13,7 +13,7 @@ export type Trendline = Trend & {
 	drawPoints: DrawPoints;
 };
 
-function generateTrendline(dataPoints: { x: number; y: number | null }[]): Trendline | null {
+export function generateTrendline(dataPoints: { x: number; y: number | null }[]): Trendline | null {
 	//remove null values
 	const filteredDataPoints = dataPoints.filter(dataPoint => dataPoint.y != null) as { x: number; y: number }[];
 	const x = filteredDataPoints.map(dataPoint => dataPoint.x);

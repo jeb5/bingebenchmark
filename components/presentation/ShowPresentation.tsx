@@ -24,7 +24,7 @@ export default function ShowPresentation({ showDetails }: { showDetails: TVShow 
 								? "unknown"
 								: showDetails.analysis?.verdict == "unknown"
 								? "unknown"
-								: showDetails.analysis?.verdict.overall
+								: showDetails.analysis?.verdict.improvementVerdict
 						}
 					/>
 					<ShowDetails className={styles.details} showDetails={showDetails} />

@@ -12,32 +12,26 @@ export type Trendlines = {
 	};
 };
 export type Verdict = {
-	overall: OverallVerdict;
-	ratingDeviation: number;
-	showRatingsTrend: {
-		positiveTrend: boolean;
+	improvementVerdict: OverallVerdict;
+	ratingsAreConsistent: boolean;
+	showTrend: {
 		trend: TrendDescriptor;
 		start: number;
 		end: number;
 	};
-	seasonsRatingTrend: {
-		positveTrend: boolean;
-		trend: TrendDescriptor;
-		numTrendingUp: number;
-		numTrendingDown: number;
-		numTrendingConsistent: number;
-		numSeasons: number;
-	};
 	firstEpisodesTrend: {
-		trend: FirstEpisodesVerdict;
+		trend: TrendDescriptor;
 		episodesConsidered: number;
-		firstEpisodesAverageRating: number;
-		followingEpisodesAverageRating: number;
+	};
+	seasonsTrend: {
+		trend: TrendDescriptor;
+		seasonsTrendingUp: number;
+		seasonsTrendingDown: number;
+		seasonsTrendingFlat: number;
 	};
 };
 export type Summary = string;
 
 export type OverallVerdict = "yes" | "maybe" | "no" | "unknown";
-export type RatingsDescriptor = "great" | "high" | "average" | "low" | "abysmal";
-export type FirstEpisodesVerdict = "slow" | "strong" | "steady";
-export type TrendDescriptor = "up" | "down" | "consistent";
+// export type RatingsDescriptor = "great" | "high" | "average" | "low" | "abysmal";
+export type TrendDescriptor = "up" | "down" | "flat";

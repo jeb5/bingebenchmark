@@ -18,33 +18,60 @@ export default function generateSummary(
 		if (rating < 9) return "high";
 		return "great";
 	})(ratingData.show_average_rating);
-	const ratingsArePositive = ratingData.show_average_rating >= 7;
-	const ratingsAreConsistent = verdict.ratingDeviation < 0.5;
+	const ratingsPositive = ratingData.show_average_rating >= 7;
+	const showVerdictPositive = verdict.showTrend.trend === "up";
+	const startVerdictPositive = verdict.firstEpisodesTrend.trend === "up";
 
-	let summary = `${showDetails.name} has ${
-		ratingsAreConsistent ? "consistently " : ""
-	}${showRatingsWord} ratings throughout its run${
-		verdict.showRatingsTrend.trend == "consistent"
-			? ". It"
-			: `, ${
-					ratingsArePositive == ("up" == verdict.showRatingsTrend.trend)
-						? `with average episode ratings ${{ up: "increasing", down: "decreasing" }[verdict.showRatingsTrend.trend]}`
-						: `although average episode ratings do ${
-								{ up: "increase", down: "decrease" }[verdict.showRatingsTrend.trend]
-						  }`
-			  } over the course of the show. The show`
-	} starts off ${verdict.firstEpisodesTrend.trend}, early episodes being ${
-		{
-			slow: "rated lower than those that follow.",
-			strong: "rated higher than those that follow.",
-			steady: "rated similiarly to the rest of the show.",
-		}[verdict.firstEpisodesTrend.trend]
-	}`;
-
-	summary += ` Ratings ${
-		{ up: "tend to trend upwards", down: "tend to trend downwards", consistent: "have no consistent trend" }[
-			verdict.seasonsRatingTrend.trend
+	const ratingsChunk = `${verdict.ratingsAreConsistent ? "consistently " : ""}${showRatingsWord} ratings`;
+	const startChunk = `${
+		{ up: "ratings climbing", down: "ratings declining", flat: "relatively flat ratings" }[
+			verdict.firstEpisodesTrend.trend
 		]
-	} within each of the show's ${verdict.seasonsRatingTrend.numSeasons} seasons.`;
+	} in the first ${verdict.firstEpisodesTrend.episodesConsidered} episodes`;
+	const showChunk = `episode quality ${
+		{ up: "improving", down: "falling", flat: "staying about the same" }[verdict.showTrend.trend]
+	} over the course of the show`;
+	const verdictChunk = {
+		yes: `${showDetails.name} may be worth sticking out`,
+		maybe: `it's hard to say whether ${showDetails.name} is worth sticking out`,
+		no: `${showDetails.name} probably isn't worth continuing`,
+		unknown: "????????",
+	}[verdict.improvementVerdict];
+
+	let summary = "";
+	let positives: string[] = [];
+	let negatives: string[] = [];
+
+	(ratingsPositive ? positives : negatives).push(ratingsChunk);
+	(showVerdictPositive ? positives : negatives).push(showChunk);
+	(startVerdictPositive ? positives : negatives).push(startChunk);
+
+	switch (verdict.improvementVerdict) {
+		case "yes":
+			if (ratingsPositive && showVerdictPositive && startVerdictPositive) {
+				summary = `With ${positives[0]}, ${positives[1]}, and ${positives[2]}, ${verdictChunk}.`;
+			} else {
+				summary = `With ${positives[0]} and ${positives[1]}, ${verdictChunk}, despite ${negatives[0]}.`;
+			}
+			break;
+		case "maybe": //2 positives, 1 negative, or 1 positive, 2 negatives
+			if (positives.length === 2) {
+				summary = `With ${positives[0]} and ${positives[1]}, despite ${negatives[0]}, ${verdictChunk}.`;
+			} else if (negatives.length === 2) {
+				summary = `With ${negatives[0]} and ${negatives[1]}, despite ${positives[0]}, ${verdictChunk}.`;
+			}
+			break;
+		case "no":
+			if (!(ratingsPositive || showVerdictPositive || startVerdictPositive)) {
+				summary = `With ${negatives[0]}, ${negatives[1]} and ${negatives[2]}, ${verdictChunk}.`;
+			} else {
+				summary = `Despite ${positives[0]}, with ${negatives[0]} and ${negatives[1]}, ${verdictChunk}.`;
+			}
+			break;
+		case "unknown":
+			summary = "idk dude";
+			break;
+	}
+
 	return summary;
 }
