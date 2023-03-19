@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { SearchResultShow } from "../../pages/api/search";
 import styles from "./ShowSearchResult.module.css";
 export default function ShowSearchResult({ show, index }: { show: SearchResultShow; index: number }) {
@@ -13,7 +12,9 @@ export default function ShowSearchResult({ show, index }: { show: SearchResultSh
 				}`}>
 				<Image
 					src={show.posterURL}
-					alt={`${show.name} poster`}
+					// alt={`${show.name} poster`}
+					//Prevents broken image icon from showing when page redirects:
+					alt=""
 					className={`${styles.poster} showPoster`}
 					width={posterWidth}
 					height={posterWidth * (3 / 2)}

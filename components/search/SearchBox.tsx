@@ -27,7 +27,10 @@ export default function SearchBox() {
 		{ staleTime: 1000 * 60 * 60, enabled: searchQueryDebouncedValue !== "" }
 	);
 
-	const onFieldSubmit = () => {};
+	const onFieldSubmit = () => {
+		if (!showQuery.isSuccess || showQuery.data.length === 0) return;
+		(window as Window).location = showQuery.data[0].url;
+	};
 
 	return (
 		<>
