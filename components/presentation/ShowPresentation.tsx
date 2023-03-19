@@ -1,5 +1,5 @@
 import styles from "./ShowPresentation.module.css";
-import HeaderBar from "./HeaderBar";
+import HeaderBar from "../header/HeaderBar";
 import ShowIntroduction from "./ShowIntroduction";
 import ShowDetails from "./ShowDetails";
 import { TVShow } from "../../lib/tv/types";
@@ -9,7 +9,6 @@ import ShowChartContainer from "./ShowChartContainer";
 export default function ShowPresentation({ showDetails }: { showDetails: TVShow }) {
 	return (
 		<div className={styles.presentation}>
-			<HeaderBar />
 			<div className={styles.mainContainer}>
 				<main className={styles.main}>
 					<ShowIntroduction

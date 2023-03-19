@@ -14,7 +14,7 @@ export default function ShowDetails({ showDetails, className }: { showDetails: T
 			<Image
 				src={showDetails.poster_url}
 				alt={`${showDetails!.name} poster`}
-				className={styles.poster}
+				className={`${styles.poster} showPoster`}
 				width={140}
 				height={210}
 				priority

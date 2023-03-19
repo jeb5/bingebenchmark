@@ -61,7 +61,7 @@ function transformTMDBShow(tmdbShow: ValidTMDBShow): ShowDetails {
 		first_air_year: new Date(tmdbShow.first_air_date).getFullYear().toString(),
 		last_air_year: tmdbShow.last_air_date ? new Date(tmdbShow.last_air_date).getFullYear().toString() : null,
 		status: tmdbShow.status,
-		poster_url: `https://image.tmdb.org/t/p/original${tmdbShow.poster_path}`,
+		poster_url: `https://image.tmdb.org/t/p/w500${tmdbShow.poster_path}`,
 		genres: tmdbShow.genres.map(genre => genre.name),
 		number_of_episodes: tmdbShow.number_of_episodes,
 		external_links: {

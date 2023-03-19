@@ -13,7 +13,7 @@ export default function ShowChartContainer({ showDetails }: { showDetails: TVSho
 	const showVerdictKnown =
 		showDetails.analysis != null &&
 		showDetails.analysis.verdict != "unknown" &&
-		showDetails.analysis.verdict.overall != "unknown";
+		showDetails.analysis.verdict.improvementVerdict != "unknown";
 	const [showSeasonTrendlines, setShowSeasonTrendlines] = useState(showVerdictKnown);
 	const [showOverallTrendline, setShowOverallTrendline] = useState(showVerdictKnown);
 	return (

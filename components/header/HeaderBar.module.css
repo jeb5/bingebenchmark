@@ -1,0 +1,13 @@
+.headerBar {
+	font-size: 20px;
+	display: flex;
+	justify-content: space-between;
+	position: fixed;
+	z-index: 10;
+	width: 100%;
+	padding: 60px 90px;
+}
+.siteName {
+	font-size: inherit;
+	margin: 0;
+}
