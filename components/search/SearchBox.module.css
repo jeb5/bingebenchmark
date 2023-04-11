@@ -1,5 +1,5 @@
 .searchContainer {
-	background: #242424;
+	background: var(--weak-foreground);
 	border-radius: 3px;
 	z-index: 12;
 	max-height: 400px;

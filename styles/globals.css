@@ -1,37 +1,49 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-
+	padding: 0;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+		Helvetica Neue, sans-serif;
+	background: var(--strong-background);
 }
-html {
-	--presentation-background: #1b1b1b;
-	--primary-text: #FFF7E3;
-	--green: #7DBC46;
-	--red: #C55858;
-	--blue: #0974C3;
 
-	--checkmark-color: var(--green);
-	--cross-color: var(--red);
-	--maybe-color: var(--blue);
-	--unknown-color: white; 
+html {
+	--strong-background: black;
+	--weak-background: #171717;
+	--weak-foreground: #212121;
+	--strong-foreground: #393939;
+	--signature-gold: #fcbf49;
+	--signature-green: #7dbc46;
+	--signature-red: #c55858;
+	--signature-blue: #0974c3;
+	--signature-offwhite: #f1ead7;
+
+	/* Can be modified for light theme: 
+	--strong-background: #ffffff;
+	--weak-background: #f1f1f1;
+	--weak-foreground: #e6e6e6;
+	--strong-foreground: #d9d9d9;
+	--signature-offwhite: #131312; */
+
+	--checkmark-color: var(--signature-green);
+	--cross-color: var(--signature-red);
+	--maybe-color: var(--signature-blue);
+	--unknown-color: var(--signature-offwhite);
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 svg {
-width: 20px;
-height: 20px;
+	width: 20px;
+	height: 20px;
 }
 .showPoster {
 	border-radius: 4px;
-	background: #303030;
+	background: var(--strong-foreground);
 }

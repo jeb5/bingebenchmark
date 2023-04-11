@@ -34,14 +34,14 @@
 	margin-right: 7px;
 }
 .calendarIcon {
-	fill: #0974C3;
+	fill: var(--signature-blue);
 }
 .starIcon {
-	fill: gold;
+	fill: var(--signature-gold);
 }
 
 .detailsRow span {
-white-space: pre;
+	white-space: pre;
 }
 .ratingOutOfSpan {
 	font-size: 10px;
