@@ -1,9 +1,11 @@
 import SearchBox from "../search/SearchBox";
 import styles from "./HeaderBar.module.css";
+import Logo from "../../assets/brand/LongLogo.svg";
+
 export default function HeaderBar() {
 	return (
 		<nav className={styles.headerBar}>
-			<h2 className={styles.siteName}>Binge Benchmark</h2>
+			<Logo className={styles.logo} />
 			<SearchBox />
 		</nav>
 	);
