@@ -2,8 +2,8 @@ import { GetStaticPropsContext } from "next";
 import Head from "next/head";
 import HeaderBar from "../components/header/HeaderBar";
 import ShowPresentation from "../components/presentation/ShowPresentation";
-import getTVShow from "../lib/tv/getTVShow";
-import { TVShow } from "../lib/tv/types";
+import getTVShow from "../lib/tv_show/getTVShow";
+import { TVShow } from "../lib/tv_show/types";
 import styles from "../styles/tvshow.module.css";
 
 //-----------------------

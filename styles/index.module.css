@@ -1,0 +1,59 @@
+.backingDiv {
+	background: #ffffff;
+}
+.topBanner {
+	position: relative;
+	height: 80vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.backingImage {
+	object-fit: cover;
+	object-position: center bottom;
+	filter: brightness(50%);
+	position: absolute;
+	z-index: 1;
+}
+.topBannerContent {
+	z-index: 2;
+	display: grid;
+	grid-template-columns: 400px max-content;
+	grid-template-rows: 1fr auto;
+	grid-template-areas: "title poster" "search poster";
+}
+.title {
+	grid-area: title;
+	margin-bottom: 20px;
+}
+.title > h1 {
+	margin: 0;
+}
+.bannerPosters {
+	grid-area: poster;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	margin-left: 60px;
+}
+.bannerPosters .poster:not(:first-child) {
+	margin-left: -60px;
+}
+.bannerPosters .poster {
+	--angle: 0deg;
+	/* Make rotate anchor bottom-right */
+	transform-origin: 50% 100%;
+	transform: rotate(var(--angle));
+	transition: transform 0.1s;
+	display: inline-block;
+}
+.bannerPosters .poster:hover {
+	transform: scale(1.15) rotate(var(--angle));
+}
+/* .bannerPosters:hover .poster:not(:hover) {
+	opacity: 70%;
+} */
+.searchBox {
+	grid-area: search;
+}

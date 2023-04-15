@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { SearchResultShow } from "../../pages/api/search";
 import styles from "./ShowSearchResult.module.css";
-export default function ShowSearchResult({ show, index }: { show: SearchResultShow; index: number }) {
+import { ShowBrief } from "../../lib/find_shows/findHelper";
+export default function ShowSearchResult({ show, index }: { show: ShowBrief; index: number }) {
 	const posterWidth = index == 0 ? 90 : 50;
 
 	return (

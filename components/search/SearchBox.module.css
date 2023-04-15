@@ -1,8 +1,5 @@
 .searchContainer {
-	background: var(--weak-foreground);
 	border-radius: 3px;
-	z-index: 12;
-	max-height: 400px;
 	width: 200px;
 	/* transition: width 0.2s ease-in-out; */
 	display: flex;
@@ -11,6 +8,24 @@
 .searchContainer.focusedState {
 	width: 380px;
 }
+.homeVersion.searchContainer {
+	width: 300px;
+}
+.boxContainer {
+	position: absolute;
+	width: 100%;
+	background: var(--weak-foreground);
+	max-height: 400px;
+	overflow: scroll;
+	z-index: 11;
+}
+.homeVersion .boxContainer {
+	max-height: 300px;
+}
+.boxContainerContainer {
+	position: relative;
+}
+
 .exceptionBox {
 	display: flex;
 	justify-content: center;

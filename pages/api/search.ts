@@ -1,12 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import search, { SearchResultShow } from "../../lib/find_shows/search";
+import search from "../../lib/find_shows/search";
 import { z } from "zod";
+import { ShowBrief } from "../../lib/find_shows/findHelper";
 
 const querySchema = z.object({
 	q: z.string(),
 });
 
-export type SearchResponse = { results: SearchResultShow[] } | { error: string };
+export type SearchResponse = { results: ShowBrief[] } | { error: string };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<SearchResponse>) {
 	const query = querySchema.safeParse(req.query);

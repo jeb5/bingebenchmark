@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { SearchResponse } from "../../pages/api/search";
 import SearchField from "./SearchField";
@@ -6,7 +6,7 @@ import ShowSearchScroll from "./ShowSearchScroll";
 import styles from "./SearchBox.module.css";
 import useDebouncedValue from "../../utilities/useDebouncedValue";
 
-export default function SearchBox() {
+export default function SearchBox({ homeVersion }: { homeVersion?: boolean }) {
 	const [searchQueryValue, setSearchQueryValue] = useState<string>("");
 	const [focused_raw, setFocused] = useState<boolean>(false);
 	const focused = focused_raw && searchQueryValue !== "";
@@ -35,7 +35,10 @@ export default function SearchBox() {
 	return (
 		<>
 			{focused && <div className={styles.backgroundBlock} onClick={e => setFocused(false)} />}
-			<div className={`${styles.searchContainer} ${focused ? styles.focusedState : ""}`}>
+			<div
+				className={`${styles.searchContainer} ${focused ? styles.focusedState : ""} ${
+					homeVersion ? styles.homeVersion : ""
+				}`}>
 				<SearchField
 					value={searchQueryValue}
 					onChange={setSearchQueryValue}
@@ -45,23 +48,29 @@ export default function SearchBox() {
 					}}
 					onSubmit={onFieldSubmit}
 					focused={focused}
+					homeVersion={homeVersion}
 				/>
-				{focused &&
-					(showQuery.isLoading ? (
-						<div className={`${styles.exceptionBox} ${styles.loadingBox}`}>...</div>
-					) : showQuery.isError ? (
-						<div className={styles.exceptionBox}>Oops, something went wrong. Please try again.</div>
-					) : showQuery.isSuccess && showQuery.data.length !== 0 ? (
-						<ShowSearchScroll shows={showQuery.data} />
-					) : (
-						searchQueryDebouncedValue !== "" && (
-							<div className={styles.exceptionBox}>
-								No results found for query {'"'}
-								<i>{searchQueryValue}</i>
-								{'"'}
-							</div>
-						)
-					))}
+				{focused && (
+					<div className={styles.boxContainerContainer}>
+						<div className={styles.boxContainer}>
+							{showQuery.isLoading ? (
+								<div className={`${styles.exceptionBox} ${styles.loadingBox}`}>...</div>
+							) : showQuery.isError ? (
+								<div className={styles.exceptionBox}>Oops, something went wrong. Please try again.</div>
+							) : showQuery.isSuccess && showQuery.data.length !== 0 ? (
+								<ShowSearchScroll shows={showQuery.data} />
+							) : (
+								searchQueryDebouncedValue !== "" && (
+									<div className={styles.exceptionBox}>
+										No results found for query {'"'}
+										<i>{searchQueryValue}</i>
+										{'"'}
+									</div>
+								)
+							)}
+						</div>
+					</div>
+				)}
 			</div>
 		</>
 	);

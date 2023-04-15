@@ -6,7 +6,20 @@
 	color: var(--signature-offwhite);
 	padding: 6px 9px;
 	width: 100%;
+	height: 100%;
+}
+.inputContainerContainer {
 	height: 29px;
+}
+.homeVersion.inputContainerContainer {
+	height: 38px;
+}
+.homeVersion .input {
+	font-size: 15px;
+	padding: 8px 14px;
+}
+.homeVersion .searchIcon {
+	right: 10px;
 }
 .input::placeholder {
 	opacity: 100%;
@@ -14,11 +27,10 @@
 .input:focus::placeholder {
 	opacity: 0;
 }
-.input.focusedState {
-	height: 35px;
-}
 .inputContainer {
 	position: relative;
+	height: 100%;
+	z-index: 11;
 }
 .searchIcon {
 	fill: var(--signature-offwhite);

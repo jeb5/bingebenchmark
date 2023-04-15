@@ -2,6 +2,7 @@
 	font-size: 20px;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	position: fixed;
 	z-index: 10;
 	width: 100%;
@@ -12,4 +13,7 @@
 	width: 190px;
 	display: block;
 	height: min-content;
+}
+.link {
+	font-size: 14px;
 }
