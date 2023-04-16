@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { TVShow } from "../../lib/tv/types";
+import { TVShow } from "../../lib/tv_show/types";
 import Button from "../elements/Button";
 import CheckboxWithLabel from "../elements/CheckboxWithLabel";
-import ShowChart from "../ShowChart";
+import ShowChart from "../show_chart/ShowChart";
 import styles from "./ShowChartContainer.module.css";
 
 export default function ShowChartContainer({ showDetails }: { showDetails: TVShow }) {

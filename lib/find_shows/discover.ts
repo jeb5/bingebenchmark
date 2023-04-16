@@ -1,7 +1,6 @@
-import { ShowResponse } from "moviedb-promise";
 import { ShowBrief, cleanupShows } from "./findHelper";
 
-const VOTE_COUNT_THRESHOLD = "200";
+const VOTE_COUNT_THRESHOLD = "500";
 
 function dateString(date: Date) {
 	return date

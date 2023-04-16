@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./ShowDetails.module.css";
 import CalendarIcon from "../../assets/icons/date.svg";
 import StarIcon from "../../assets/icons/star.svg";
-import { TVShow } from "../../lib/tv/types";
+import { TVShow } from "../../lib/tv_show/types";
 
 export default function ShowDetails({ showDetails, className }: { showDetails: TVShow; className: string }) {
 	const dateText = `${showDetails.first_air_year}${

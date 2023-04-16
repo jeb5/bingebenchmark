@@ -1,5 +1,5 @@
-import { TVShow } from "../lib/tv/types";
-import { Line, Scatter } from "react-chartjs-2";
+import { TVShow } from "../../lib/tv_show/types";
+import { Scatter } from "react-chartjs-2";
 import styles from "./ShowChart.module.css";
 import {
 	Chart as ChartJS,
@@ -13,7 +13,7 @@ import {
 	Tick,
 } from "chart.js";
 import { createContext, useMemo } from "react";
-import { Trendline } from "../lib/analysis/trendlines";
+import { Trendline } from "../../lib/analysis/trendlines";
 //TODO: Refactor season colouring
 //TODO: Display episode name as tooltip
 

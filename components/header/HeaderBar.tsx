@@ -6,7 +6,10 @@ import Link from "next/link";
 export default function HeaderBar({ homeVersion }: { homeVersion?: boolean }) {
 	return (
 		<nav className={styles.headerBar}>
-			<Logo className={styles.logo} />
+			{/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+			<a href="/">
+				<Logo className={styles.logo} />
+			</a>
 			{homeVersion ? (
 				<Link href="/about" className={styles.link}>
 					About
