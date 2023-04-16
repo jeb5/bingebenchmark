@@ -39,7 +39,7 @@ export default function Home({
 	return (
 		<>
 			<HeaderBar homeVersion />
-			<Image className={styles.backingImage} src="/banner.jpg" alt="Banner" priority fill />
+			<Image className={styles.backingImage} src="/banner.png" alt="Banner" priority fill />
 			<div className={styles.contentHolder}>
 				<div className={styles.topBanner}>
 					<div className={styles.topBannerContent}>
