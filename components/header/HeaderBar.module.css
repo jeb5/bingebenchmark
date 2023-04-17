@@ -2,10 +2,20 @@
 	font-size: 20px;
 	display: flex;
 	justify-content: space-between;
-	position: fixed;
+	align-items: center;
+	position: sticky;
 	z-index: 10;
 	width: 100%;
-	padding: 60px 90px;
+	top: -1px;
+	margin-top: 40px;
+	padding: 20px 90px;
+	padding-top: 21px;
+	transition: backdrop-filter 100ms, background 100ms;
+}
+.headerBar.isStuck {
+	transition: backdrop-filter 500ms, background 500ms;
+	backdrop-filter: blur(10px);
+	background: #17171760;
 }
 .logo {
 	margin: 0;

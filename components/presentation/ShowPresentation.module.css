@@ -1,7 +1,4 @@
 .presentation {
-	width: 100vw;
-	height: 100vh;
-	background: var(--weak-background);
 	padding: 50px 80px;
 	display: flex;
 	flex-direction: column;

@@ -33,6 +33,7 @@ export default function ShowPage({ showDetails }: { showDetails: TVShow }) {
 			<Head>
 				<title>{`Does ${showDetails!.name} get better?`}</title>
 			</Head>
+			<div className={styles.topContentBacker} />
 			<div className={styles.page}>
 				<HeaderBar />
 				<ShowPresentation showDetails={showDetails} />

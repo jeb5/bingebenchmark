@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ForwardedRef, forwardRef, useState } from "react";
 import { useQuery } from "react-query";
 import { SearchResponse } from "../../pages/api/search";
 import SearchField from "./SearchField";
@@ -6,7 +6,10 @@ import ShowSearchScroll from "./ShowSearchScroll";
 import styles from "./SearchBox.module.css";
 import useDebouncedValue from "../../utilities/useDebouncedValue";
 
-export default function SearchBox({ homeVersion }: { homeVersion?: boolean }) {
+const SearchBox = forwardRef(function SearchBox(
+	{ homeVersion }: { homeVersion?: boolean },
+	ref: ForwardedRef<HTMLDivElement>
+) {
 	const [searchQueryValue, setSearchQueryValue] = useState<string>("");
 	const [focused_raw, setFocused] = useState<boolean>(false);
 	const focused = focused_raw && searchQueryValue !== "";
@@ -38,7 +41,8 @@ export default function SearchBox({ homeVersion }: { homeVersion?: boolean }) {
 			<div
 				className={`${styles.searchContainer} ${focused ? styles.focusedState : ""} ${
 					homeVersion ? styles.homeVersion : ""
-				}`}>
+				}`}
+				ref={ref}>
 				<SearchField
 					value={searchQueryValue}
 					onChange={setSearchQueryValue}
@@ -74,4 +78,5 @@ export default function SearchBox({ homeVersion }: { homeVersion?: boolean }) {
 			</div>
 		</>
 	);
-}
+});
+export default SearchBox;

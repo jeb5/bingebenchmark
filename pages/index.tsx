@@ -7,14 +7,17 @@ import SearchBox from "../components/search/SearchBox";
 import ShowCarousel from "../components/show_carousel/ShowCarousel";
 import ChevronIcon from "../assets/icons/chevron.svg";
 import { shuffle } from "../utilities/util";
+import Head from "next/head";
+import { useRef } from "react";
+import useIntersectionEntry from "../utilities/useIntersectionEntry";
 
 type FrontPageShows = {
 	name: string;
 	shows: ShowBrief[];
 }[];
 
-const BANNER_MAX_POSTER_WIDTH = 105;
-const BANNER_MIN_POSTER_WIDTH = 105;
+const POSTER_WIDTH = 105;
+
 export async function getStaticProps() {
 	const frontPageShows: FrontPageShows = [
 		{ name: "Airing this week", shows: await discover("airing_this_week") },
@@ -36,11 +39,18 @@ export default function Home({
 	frontPageShows: FrontPageShows;
 	posterShows: ShowBrief[];
 }) {
+	const searchBoxRef = useRef<HTMLDivElement>(null);
+	const intersectionEntry = useIntersectionEntry(searchBoxRef);
+	const searchBoxVisible = intersectionEntry?.isIntersecting ?? false;
+
 	return (
 		<>
-			<HeaderBar homeVersion />
+			<Head>
+				<title>Binge Benchmark</title>
+			</Head>
 			<Image className={styles.backingImage} src="/banner.png" alt="Banner" priority fill />
 			<div className={styles.contentHolder}>
+				<HeaderBar hideSearch={searchBoxVisible} />
 				<div className={styles.topBanner}>
 					<div className={styles.topBannerContent}>
 						<div className={styles.title}>
@@ -48,29 +58,28 @@ export default function Home({
 							<p>Does it get better? Find out with a glance at the ratings graph.</p>
 						</div>
 						<div className={styles.searchBox}>
-							<SearchBox homeVersion />
+							<SearchBox homeVersion ref={searchBoxRef} />
 						</div>
 						<div className={styles.bannerPosters}>
 							<div>
 								{posterShows.reverse().map((show, index) => {
-									const posterWidth =
-										BANNER_MIN_POSTER_WIDTH +
-										(BANNER_MAX_POSTER_WIDTH - BANNER_MIN_POSTER_WIDTH) * (index / (posterShows.length - 1));
 									const angle = ((posterShows.length - 1 - index) / (posterShows.length - 1)) * -20 + 20 * 0.5;
 									return (
 										<a
 											href={show.url}
 											key={index}
 											className={styles.poster}
-											style={{ "--angle": `${angle}deg` } as React.CSSProperties}>
+											style={
+												{ "--angle": `${angle}deg`, animationDelay: `${index * 100 + 100}ms` } as React.CSSProperties
+											}>
 											<Image
 												src={show.posterURL}
 												// alt={`${show.name} poster`}
 												//Prevents broken image icon from showing when page redirects:
 												alt=""
 												className={"showPoster"}
-												width={posterWidth}
-												height={posterWidth * (3 / 2)}
+												width={POSTER_WIDTH}
+												height={POSTER_WIDTH * (3 / 2)}
 												priority
 											/>
 										</a>

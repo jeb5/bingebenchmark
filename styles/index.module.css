@@ -3,7 +3,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	margin-top: 280px;
+	margin-top: 160px;
 }
 .backingImage {
 	object-fit: cover;
@@ -51,8 +51,14 @@
 	transition: transform 0.1s;
 	display: inline-block;
 }
+.bannerPosters .poster > img {
+	box-shadow: 0 0 5px 0 #000a;
+}
 .bannerPosters .poster:hover {
 	transform: scale(1.15) rotate(var(--angle));
+}
+.bannerPosters .poster:hover > img {
+	box-shadow: 0 0 10px 0 black;
 }
 /* .bannerPosters:hover .poster:not(:hover) {
 	opacity: 70%;
