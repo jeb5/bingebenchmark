@@ -48,58 +48,56 @@ export default function Home({
 			<Head>
 				<title>Binge Benchmark</title>
 			</Head>
+			<HeaderBar hideSearch={searchBoxVisible} />
 			<Image className={styles.backingImage} src="/banner.png" alt="Banner" priority fill />
-			<div className={styles.contentHolder}>
-				<HeaderBar hideSearch={searchBoxVisible} />
-				<div className={styles.topBanner}>
-					<div className={styles.topBannerContent}>
-						<div className={styles.title}>
-							<h1>{"Don't waste your time on bad TV."}</h1>
-							<p>Does it get better? Find out with a glance at the ratings graph.</p>
-						</div>
-						<div className={styles.searchBox}>
-							<SearchBox homeVersion ref={searchBoxRef} />
-						</div>
-						<div className={styles.bannerPosters}>
-							<div>
-								{posterShows.reverse().map((show, index) => {
-									const angle = ((posterShows.length - 1 - index) / (posterShows.length - 1)) * -20 + 20 * 0.5;
-									return (
-										<a
-											href={show.url}
-											key={index}
-											className={styles.poster}
-											style={
-												{ "--angle": `${angle}deg`, animationDelay: `${index * 100 + 100}ms` } as React.CSSProperties
-											}>
-											<Image
-												src={show.posterURL}
-												// alt={`${show.name} poster`}
-												//Prevents broken image icon from showing when page redirects:
-												alt=""
-												className={"showPoster"}
-												width={POSTER_WIDTH}
-												height={POSTER_WIDTH * (3 / 2)}
-												priority
-											/>
-										</a>
-									);
-								})}
-							</div>
+			<div className={styles.topBanner}>
+				<div className={styles.topBannerContent}>
+					<div className={styles.title}>
+						<h1>{"Don't waste your time on bad TV."}</h1>
+						<p>Does it get better? Find out with a glance at the ratings graph.</p>
+					</div>
+					<div className={styles.searchBox}>
+						<SearchBox homeVersion ref={searchBoxRef} />
+					</div>
+					<div className={styles.bannerPosters}>
+						<div>
+							{posterShows.reverse().map((show, index) => {
+								const angle = ((posterShows.length - 1 - index) / (posterShows.length - 1)) * -20 + 20 * 0.5;
+								return (
+									<a
+										href={show.url}
+										key={index}
+										className={styles.poster}
+										style={
+											{ "--angle": `${angle}deg`, animationDelay: `${index * 100 + 100}ms` } as React.CSSProperties
+										}>
+										<Image
+											src={show.posterURL}
+											// alt={`${show.name} poster`}
+											//Prevents broken image icon from showing when page redirects:
+											alt=""
+											className={"showPoster"}
+											width={POSTER_WIDTH}
+											height={POSTER_WIDTH * (3 / 2)}
+											priority
+										/>
+									</a>
+								);
+							})}
 						</div>
 					</div>
 				</div>
-				<div className={styles.mainContent}>
-					{frontPageShows.map((section, index) => (
-						<div key={index}>
-							<h2 className={styles.sectionTitle}>
-								{section.name}
-								<ChevronIcon className={styles.chevronIcon} />
-							</h2>
-							<ShowCarousel shows={section.shows} />
-						</div>
-					))}
-				</div>
+			</div>
+			<div className={styles.mainContent}>
+				{frontPageShows.map((section, index) => (
+					<div key={index}>
+						<h2 className={styles.sectionTitle}>
+							{section.name}
+							<ChevronIcon className={styles.chevronIcon} />
+						</h2>
+						<ShowCarousel shows={section.shows} />
+					</div>
+				))}
 			</div>
 		</>
 	);

@@ -7,6 +7,10 @@
 	padding: 6px 9px;
 	width: 100%;
 	height: 100%;
+	font-size: 14px;
+}
+.input::placeholder {
+	color: var(--signature-offwhite);
 }
 .inputContainerContainer {
 	height: 29px;

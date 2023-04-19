@@ -6,6 +6,10 @@ body {
 		Helvetica Neue, sans-serif;
 	background: var(--strong-background);
 	color: var(--signature-offwhite);
+	/* overscroll-behavior-y: none; */
+}
+#__next {
+	display: flow-root;
 }
 
 html {

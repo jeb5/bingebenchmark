@@ -3,14 +3,18 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	position: sticky;
-	z-index: 10;
 	width: 100%;
-	top: -1px;
-	margin-top: 40px;
 	padding: 20px 90px;
 	padding-top: 21px;
 	transition: backdrop-filter 100ms, background 100ms;
+
+	position: absolute;
+	top: 39px; /*This space will be gone when parent becomes "stuck"*/
+}
+.headerBarContainer {
+	position: sticky;
+	top: -40px; /* Will get stuck once this much above view */
+	z-index: 10;
 }
 .headerBar.isStuck {
 	transition: backdrop-filter 500ms, background 500ms;
@@ -22,7 +26,7 @@
 	margin-top: 5px;
 	width: 190px;
 	display: block;
-	height: min-content;
+	height: auto;
 }
 .link {
 	font-size: 14px;
