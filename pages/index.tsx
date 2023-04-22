@@ -3,13 +3,15 @@ import styles from "../styles/index.module.css";
 import Image from "next/image";
 import discover from "../lib/find_shows/discover";
 import { ShowBrief } from "../lib/find_shows/findHelper";
-import SearchBox from "../components/search/SearchBox";
 import ShowCarousel from "../components/show_carousel/ShowCarousel";
 import ChevronIcon from "../assets/icons/chevron.svg";
-import { shuffle } from "../utilities/util";
+import { cn, shuffle } from "../utilities/util";
 import Head from "next/head";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import useIntersectionEntry from "../utilities/useIntersectionEntry";
+import useSearch from "../components/search/useSearch";
+import HomeSearchField from "../components/home_search/HomeSearchField";
+import HomeSearchResults from "../components/home_search/HomeSearchResults";
 
 type FrontPageShows = {
 	name: string;
@@ -43,6 +45,15 @@ export default function Home({
 	const intersectionEntry = useIntersectionEntry(searchBoxRef);
 	const searchBoxVisible = intersectionEntry?.isIntersecting ?? false;
 
+	const [searchFocusedRaw, setSearchFocused] = useState<boolean>(false);
+	const { searchQueryValue, setSearchQueryValue, showQuery, searchQueryDebouncedValue } = useSearch();
+	const searchFocused = searchFocusedRaw && searchQueryValue !== "";
+
+	const onFieldSubmit = () => {
+		if (!showQuery.isSuccess || showQuery.data.length === 0) return;
+		(window as Window).location = showQuery.data[0].url;
+	};
+
 	return (
 		<>
 			<Head>
@@ -56,8 +67,17 @@ export default function Home({
 						<h1>{"Don't waste your time on bad TV."}</h1>
 						<p>Does it get better? Find out with a glance at the ratings graph.</p>
 					</div>
-					<div className={styles.searchBox}>
-						<SearchBox homeVersion ref={searchBoxRef} />
+					<div className={styles.searchBox} ref={searchBoxRef}>
+						<HomeSearchField
+							value={searchQueryValue}
+							onChange={setSearchQueryValue}
+							onFocus={() => setSearchFocused(true)}
+							onBlur={() => {
+								if (searchQueryValue === "") setSearchFocused(false);
+							}}
+							onSubmit={onFieldSubmit}
+							focused={searchFocused}
+						/>
 					</div>
 					<div className={styles.bannerPosters}>
 						<div>
@@ -88,7 +108,29 @@ export default function Home({
 					</div>
 				</div>
 			</div>
-			<div className={styles.mainContent}>
+			<div className={styles.searchResultsContainer}>
+				{searchQueryDebouncedValue !== "" &&
+					(showQuery.isLoading ? (
+						<div className={`${styles.exceptionBox} ${styles.loadingBox}`}>...</div>
+					) : showQuery.isError ? (
+						<div className={styles.exceptionBox}>Oops, something went wrong. Please try again.</div>
+					) : showQuery.isSuccess && showQuery.data.length !== 0 ? (
+						<div className={styles.searchResults}>
+							<HomeSearchResults shows={showQuery.data} />
+						</div>
+					) : (
+						searchQueryDebouncedValue !== "" && (
+							<div className={styles.exceptionBox}>
+								<div>
+									No results found for query {'"'}
+									<i>{searchQueryDebouncedValue}</i>
+									{'"'}
+								</div>
+							</div>
+						)
+					))}
+			</div>
+			<div className={cn(styles.mainContent, searchQueryDebouncedValue !== "" && styles.belowSearchResults)}>
 				{frontPageShows.map((section, index) => (
 					<div key={index}>
 						<h2 className={styles.sectionTitle}>

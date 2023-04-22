@@ -5,30 +5,15 @@ import SearchField from "./SearchField";
 import ShowSearchScroll from "./ShowSearchScroll";
 import styles from "./SearchBox.module.css";
 import useDebouncedValue from "../../utilities/useDebouncedValue";
+import useSearch from "./useSearch";
 
 const SearchBox = forwardRef(function SearchBox(
 	{ homeVersion }: { homeVersion?: boolean },
 	ref: ForwardedRef<HTMLDivElement>
 ) {
-	const [searchQueryValue, setSearchQueryValue] = useState<string>("");
 	const [focused_raw, setFocused] = useState<boolean>(false);
+	const { searchQueryValue, setSearchQueryValue, showQuery, searchQueryDebouncedValue } = useSearch();
 	const focused = focused_raw && searchQueryValue !== "";
-
-	const searchQueryDebouncedValue = useDebouncedValue(searchQueryValue, 500, {
-		debounceFalsy: false,
-		debounceOldValues: false,
-	});
-
-	const showQuery = useQuery(
-		["search", searchQueryDebouncedValue],
-		async () => {
-			const response = await fetch(`/api/search?q=${searchQueryDebouncedValue}`);
-			const data: SearchResponse = await response.json();
-			if ("error" in data) throw new Error(data.error);
-			return data.results;
-		},
-		{ staleTime: 1000 * 60 * 60, enabled: searchQueryDebouncedValue !== "" }
-	);
 
 	const onFieldSubmit = () => {
 		if (!showQuery.isSuccess || showQuery.data.length === 0) return;
@@ -66,9 +51,11 @@ const SearchBox = forwardRef(function SearchBox(
 							) : (
 								searchQueryDebouncedValue !== "" && (
 									<div className={styles.exceptionBox}>
-										No results found for query {'"'}
-										<i>{searchQueryValue}</i>
-										{'"'}
+										<div>
+											No results found for query {'"'}
+											<i>{searchQueryDebouncedValue}</i>
+											{'"'}
+										</div>
 									</div>
 								)
 							)}

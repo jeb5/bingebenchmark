@@ -1,0 +1,43 @@
+.input {
+	background: var(--strong-foreground);
+	outline: none;
+	border: none;
+	border-radius: 3px;
+	color: var(--signature-offwhite);
+	height: 100%;
+	width: 100%;
+	font-size: 15px;
+	padding: 8px 14px;
+}
+.input::placeholder {
+	color: var(--signature-offwhite);
+}
+.inputContainerContainer {
+	height: 38px;
+	width: 300px;
+}
+.input::placeholder {
+	opacity: 100%;
+}
+.input:focus::placeholder {
+	opacity: 0;
+}
+.inputContainer {
+	position: relative;
+	height: 100%;
+	z-index: 11;
+}
+.searchIcon {
+	fill: var(--signature-offwhite);
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 20px;
+	height: 20px;
+}
+.searchIcon.focusedState {
+	right: 6px;
+	width: 25px;
+	height: 25px;
+}

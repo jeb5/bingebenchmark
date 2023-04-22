@@ -6,3 +6,6 @@ export function shuffle<T>(array: T[]): T[] {
 	}
 	return shuffled;
 }
+export function cn(...classes: (string | false)[]): string {
+	return classes.filter(c => c !== false).join(" ");
+}

@@ -63,9 +63,15 @@
 .mainContent {
 	position: relative;
 	z-index: 1;
-	margin: 250px 220px 0 250px;
+	margin: 170px 220px 0 250px;
 	margin-bottom: 200px;
+	transition: margin-top 200ms ease-in-out;
 }
+
+.mainContent.belowSearchResults {
+	margin-top: 20px;
+}
+
 .sectionTitle {
 	font-size: 16px;
 	margin-bottom: 24px;
@@ -79,4 +85,34 @@
 	height: 1.2ex;
 	margin-left: 5px;
 	margin-top: 1px;
+}
+.searchResultsContainer {
+	position: relative;
+	z-index: 1;
+	height: 1px; /*So that main-content won't margin-collapse*/
+	margin: 90px 220px 0 250px;
+	transition: height 200ms ease-in-out, opacity 200ms ease-in-out;
+	opacity: 0;
+}
+.searchResultsContainer:not(:empty) {
+	height: 280px;
+	opacity: 1;
+	overflow: hidden;
+}
+.searchResults {
+	animation: 500ms fadeIn ease-in-out;
+}
+.searchResultsContainer .exceptionBox {
+	animation: 200ms fadeIn ease-in-out;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
