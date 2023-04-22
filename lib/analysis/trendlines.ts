@@ -1,4 +1,4 @@
-import { EpisodeRating, RatingData } from "../tv/types";
+import { EpisodeRating, RatingData } from "../tv_show/types";
 import { Trendlines } from "./types";
 
 export type Trend = {

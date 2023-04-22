@@ -1,4 +1,4 @@
-import { RatingData, ShowDetails } from "../tv/types";
+import { RatingData, ShowDetails } from "../tv_show/types";
 import { Summary, Trendlines, Verdict } from "./types";
 
 //TODO: Rethink verdict summaries. They should be more conversational, less technical, more varied, and include phrases like "worth sticking with/out", "doesn't get much better", "gets good at episode 5" etc
@@ -18,7 +18,7 @@ export default function generateSummary(
 		if (rating < 9) return "high";
 		return "great";
 	})(ratingData.show_average_rating);
-	const ratingsPositive = ratingData.show_average_rating >= 7;
+	const ratingsPositive = ratingData.show_average_rating >= 7.5;
 	const showVerdictPositive = verdict.showTrend.trend === "up";
 	const startVerdictPositive = verdict.firstEpisodesTrend.trend === "up";
 

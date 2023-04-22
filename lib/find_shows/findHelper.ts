@@ -14,7 +14,8 @@ export function cleanupShows(shows: ShowResponse[]): ShowBrief[] {
 			!show.poster_path ||
 			!show.first_air_date ||
 			!show.overview ||
-			!show.original_name
+			!show.original_name ||
+			(show.vote_count ?? 0) < 10
 		)
 			return [];
 		originalNamesSet.add(show.original_name);

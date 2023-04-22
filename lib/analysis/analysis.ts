@@ -1,7 +1,7 @@
-import { EpisodeRating, RatingData, ShowDetails } from "../tv/types";
+import { RatingData, ShowDetails } from "../tv_show/types";
 import generateSummary from "./summary";
-import { generateTrendlines, Trendline } from "./trendlines";
-import { Analysis, Trendlines, Verdict } from "./types";
+import { generateTrendlines } from "./trendlines";
+import { Analysis } from "./types";
 import generateVerdict from "./verdict";
 
 export function generateAnalysis(ratingData: RatingData, showDetails: ShowDetails): Analysis {

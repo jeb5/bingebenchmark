@@ -1,4 +1,4 @@
-import { EpisodeRating, RatingData, ShowDetails } from "../tv/types";
+import { EpisodeRating, RatingData, ShowDetails } from "../tv_show/types";
 import { generateTrendline } from "./trendlines";
 import { TrendDescriptor, Trendlines, Verdict } from "./types";
 
@@ -38,8 +38,8 @@ function determineFirstEpisodesTrend(
 	const firstEpisodeCount = determineFirstEpisodesToConsider(showDetails);
 	const slope = determineFirstEpisodesSlope(episodeDatapoints, firstEpisodeCount);
 	let trend: TrendDescriptor = "flat";
-	if (slope > 0.01) trend = "up";
-	if (slope < -0.01) trend = "down";
+	if (slope > 0.03) trend = "up";
+	if (slope < -0.03) trend = "down";
 	return {
 		trend,
 		episodesConsidered: firstEpisodeCount,
@@ -127,9 +127,10 @@ export default function generateVerdict(
 		}, 0) / cleanedEpisodeDatapoints.length
 	);
 
+	//BUG: This logic should not be duplicated across this file and summary.ts
 	const positiveStartMetric = firstEpisodesTrend.trend === "up";
 	const positiveShowMetric = showTrend.trend === "up";
-	const positiveRatingsMetric = ratingData.show_average_rating > 7.5;
+	const positiveRatingsMetric = ratingData.show_average_rating >= 7.5;
 
 	const positiveSeasons_not_a_metric = seasonsTrend.trend === "up";
 
