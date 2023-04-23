@@ -12,6 +12,7 @@ import useIntersectionEntry from "../utilities/useIntersectionEntry";
 import useSearch from "../components/search/useSearch";
 import HomeSearchField from "../components/home_search/HomeSearchField";
 import HomeSearchResults from "../components/home_search/HomeSearchResults";
+import Loading from "../components/elements/Loading";
 
 type FrontPageShows = {
 	name: string;
@@ -108,10 +109,16 @@ export default function Home({
 					</div>
 				</div>
 			</div>
-			<div className={styles.searchResultsContainer}>
+			<div
+				className={cn(
+					styles.searchResultsContainer,
+					showQuery.isSuccess && showQuery.data.length !== 0 && styles.someResults
+				)}>
 				{searchQueryDebouncedValue !== "" &&
 					(showQuery.isLoading ? (
-						<div className={`${styles.exceptionBox} ${styles.loadingBox}`}>...</div>
+						<div className={`${styles.exceptionBox} ${styles.loadingBox}`}>
+							<Loading />
+						</div>
 					) : showQuery.isError ? (
 						<div className={styles.exceptionBox}>Oops, something went wrong. Please try again.</div>
 					) : showQuery.isSuccess && showQuery.data.length !== 0 ? (
@@ -130,7 +137,7 @@ export default function Home({
 						)
 					))}
 			</div>
-			<div className={cn(styles.mainContent, searchQueryDebouncedValue !== "" && styles.belowSearchResults)}>
+			<div className={styles.mainContent}>
 				{frontPageShows.map((section, index) => (
 					<div key={index}>
 						<h2 className={styles.sectionTitle}>

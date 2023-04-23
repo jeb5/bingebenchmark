@@ -63,13 +63,8 @@
 .mainContent {
 	position: relative;
 	z-index: 1;
-	margin: 170px 220px 0 250px;
+	margin: 20px 220px 0 250px;
 	margin-bottom: 200px;
-	transition: margin-top 200ms ease-in-out;
-}
-
-.mainContent.belowSearchResults {
-	margin-top: 20px;
 }
 
 .sectionTitle {
@@ -89,15 +84,18 @@
 .searchResultsContainer {
 	position: relative;
 	z-index: 1;
-	height: 1px; /*So that main-content won't margin-collapse*/
+	height: 160px;
 	margin: 90px 220px 0 250px;
 	transition: height 200ms ease-in-out, opacity 200ms ease-in-out;
 	opacity: 0;
 }
 .searchResultsContainer:not(:empty) {
-	height: 280px;
+	height: 180px;
 	opacity: 1;
 	overflow: hidden;
+}
+.searchResultsContainer.someResults {
+	height: 280px;
 }
 .searchResults {
 	animation: 500ms fadeIn ease-in-out;
@@ -107,6 +105,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+.searchResultsContainer .loadingBox {
+	opacity: 80%;
 }
 @keyframes fadeIn {
 	0% {
