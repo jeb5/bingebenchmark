@@ -16,6 +16,6 @@ export default function useIntersectionEntry(
 
 		if (ref.current) observer.observe(ref.current);
 		return () => observer.disconnect();
-	}, [ref, intersectionOptions]);
+	}, [ref, intersectionOptions]); //Need to be careful that intersectionOptions is not a new object every render
 	return entry;
 }

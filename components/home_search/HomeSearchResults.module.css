@@ -1,21 +1,11 @@
 .searchCarousel {
-	overflow: scroll;
+	overflow-x: scroll;
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: flex-end;
 
 	scroll-snap-type: x proximity;
 	/* Horizontal scroll snapping is buggy in Firefox DE */
-
-	/* Avoids scrollbars */
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-/*Avoids scrollbars some more*/
-.searchCarousel::-webkit-scrollbar {
-	-webkit-appearance: none;
-	width: 0;
-	height: 0;
 }
 
 .show {

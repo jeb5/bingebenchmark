@@ -14,6 +14,7 @@ import HomeSearchField from "../components/home_search/HomeSearchField";
 import HomeSearchResults from "../components/home_search/HomeSearchResults";
 import Loading from "../components/elements/Loading";
 import Footer from "../components/footer/Footer";
+import BackingImage from "../assets/banner.png";
 
 type FrontPageShows = {
 	name: string;
@@ -62,7 +63,7 @@ export default function Home({
 				<title>Binge Benchmark</title>
 			</Head>
 			<HeaderBar hideSearch={searchBoxVisible} />
-			<Image className={styles.backingImage} src="/banner.png" alt="Banner" priority fill />
+			<Image className={styles.backingImage} src={BackingImage} alt="Blurred background posters" priority />
 			<div className={styles.topBanner}>
 				<div className={styles.topBannerContent}>
 					<div className={styles.title}>
@@ -100,7 +101,7 @@ export default function Home({
 											alt=""
 											className={"showPoster"}
 											width={POSTER_WIDTH}
-											height={POSTER_WIDTH * (3 / 2)}
+											height={Math.floor(POSTER_WIDTH * (3 / 2))}
 											priority
 										/>
 									</a>

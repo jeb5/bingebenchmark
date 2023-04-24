@@ -2,6 +2,7 @@ import { GetStaticPropsContext } from "next";
 import Head from "next/head";
 import HeaderBar from "../components/header/HeaderBar";
 import ShowPresentation from "../components/presentation/ShowPresentation";
+import ShowExtraInfo from "../components/show_extra_info/ShowExtraInfo";
 import getTVShow from "../lib/tv_show/getTVShow";
 import { TVShow } from "../lib/tv_show/types";
 
@@ -35,6 +36,7 @@ export default function ShowPage({ showDetails }: { showDetails: TVShow }) {
 			<HeaderBar />
 			<div>
 				<ShowPresentation showDetails={showDetails} />
+				{/* <ShowExtraInfo showDetails={showDetails} /> */}
 			</div>
 		</>
 	);

@@ -43,7 +43,15 @@ a {
 
 * {
 	box-sizing: border-box;
+	scrollbar-width: none; /*So ugly!*/
 }
+/*Avoids scrollbars some more*/
+*::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 0;
+	height: 0;
+}
+
 .showPoster {
 	border-radius: 4px;
 	background: var(--strong-foreground);
