@@ -13,6 +13,7 @@ import useSearch from "../components/search/useSearch";
 import HomeSearchField from "../components/home_search/HomeSearchField";
 import HomeSearchResults from "../components/home_search/HomeSearchResults";
 import Loading from "../components/elements/Loading";
+import Footer from "../components/footer/Footer";
 
 type FrontPageShows = {
 	name: string;
@@ -148,6 +149,7 @@ export default function Home({
 					</div>
 				))}
 			</div>
+			<Footer />
 		</>
 	);
 }
