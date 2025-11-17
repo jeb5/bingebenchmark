@@ -36,7 +36,7 @@ export default function ShowPage({ showDetails }: { showDetails: TVShow }) {
 			<HeaderBar />
 			<div>
 				<ShowPresentation showDetails={showDetails} />
-				{/* <ShowExtraInfo showDetails={showDetails} /> */}
+				<ShowExtraInfo showDetails={showDetails} />
 			</div>
 		</>
 	);
