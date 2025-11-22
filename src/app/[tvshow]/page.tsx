@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import HeaderBar from "@/components/header/HeaderBar";
 import ShowPresentation from "@/components/presentation/ShowPresentation";
-import ShowExtraInfo from "@/components/show_extra_info/ShowExtraInfo";
+import ShowExtraInfo from "@/components/ShowExtraInfo";
 import getTVShow from "@/lib/tv_show/getTVShow";
 import { Metadata, ResolvingMetadata } from "next";
 

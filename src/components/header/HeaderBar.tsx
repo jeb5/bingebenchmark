@@ -5,6 +5,7 @@ import Logo from "@/assets/brand/LongLogo.svg";
 import { useRef } from "react";
 import useIntersectionEntry from "@/utilities/useIntersectionEntry";
 import Link from "next/link";
+import clsx from "clsx";
 
 const intersectionEntryOptions = { threshold: [1] }; //Declared outside of component to prevent redeclaration on every render, as useEffect only compares object references
 
@@ -15,11 +16,16 @@ export default function HeaderBar({ hideSearch }: { hideSearch?: boolean }) {
   const isStuck = (intersectionEntry?.intersectionRatio ?? 2) < 1;
 
   return (
-    <div className={styles.headerBarContainer}>
-      <nav className={`${styles.headerBar} ${isStuck ? styles.isStuck : ""}`} ref={navRef}>
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+    <div className="sticky -top-10 z-10">
+      <nav
+        className={clsx(
+          "absolute flex justify-between items-center w-full py-5 px-22 transition-[backdrop-filter, background-color] duration-0 top-[39px]",
+          { "backdrop-blur-md bg-[#17171760] duration-500": isStuck }
+        )}
+        ref={navRef}
+      >
         <Link href="/">
-          <Logo className={styles.logo} />
+          <Logo className="mt-[5px] w-[190px] h-auto" />
         </Link>
         {!hideSearch && <SearchBox />}
       </nav>

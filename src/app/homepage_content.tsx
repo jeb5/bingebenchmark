@@ -1,10 +1,9 @@
 "use client";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import Head from "next/head";
 import HeaderBar from "@/components/header/HeaderBar";
 import styles from "@/styles/index.module.css";
-import ShowCarousel from "@/components/show_carousel/ShowCarousel";
+import ShowCarousel from "@/components/ShowCarousel";
 import ChevronIcon from "@/assets/icons/chevron.svg";
 
 import useIntersectionEntry from "@/utilities/useIntersectionEntry";
@@ -18,6 +17,7 @@ import { cn } from "@/utilities/util";
 import { FrontPageShows } from "./page";
 import { ShowBrief } from "@/lib/find_shows/findHelper";
 import Poster from "@/components/elements/Poster";
+import Link from "next/link";
 
 export default function HomepageContent({ frontPageShows, posterShows }: { frontPageShows: FrontPageShows; posterShows: ShowBrief[] }) {
   const searchBoxRef = useRef<HTMLDivElement | null>(null);
@@ -64,14 +64,14 @@ export default function HomepageContent({ frontPageShows, posterShows }: { front
               {posterShows.reverse().map((show, index) => {
                 const angle = ((posterShows.length - 1 - index) / (posterShows.length - 1)) * -20 + 20 * 0.5;
                 return (
-                  <a
+                  <Link
                     href={show.url}
                     key={index}
                     className={styles.poster}
                     style={{ "--angle": `${angle}deg`, animationDelay: `${index * 100 + 100}ms` } as React.CSSProperties}
                   >
                     <Poster posterURL={show.posterURL} posterWidth={110} />
-                  </a>
+                  </Link>
                 );
               })}
             </div>
