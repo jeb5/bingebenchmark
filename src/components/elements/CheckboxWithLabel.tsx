@@ -9,9 +9,14 @@ export default function CheckboxWithLabel({
 	setChecked: (checked: boolean) => void;
 }) {
 	return (
-		<label className={styles.checkboxWithLabel}>
-			<input type="checkbox" checked={checked} onChange={e => setChecked(e.target.checked)} />
-			<span>{label}</span>
-		</label>
-	);
+    <label className="text-xs">
+      <input
+        className="w-3 h-3 mr-1.5 accent-(--signature-blue)"
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => setChecked(e.target.checked)}
+      />
+      <span>{label}</span>
+    </label>
+  );
 }

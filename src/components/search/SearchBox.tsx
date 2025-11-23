@@ -3,6 +3,7 @@ import SearchField from "./SearchField";
 import ShowSearchScroll from "./ShowSearchScroll";
 import useSearch from "./useSearch";
 import clsx from "clsx";
+import Loading from "../elements/Loading";
 
 const SearchBox = function SearchBox() {
   const [focused_raw, setFocused] = useState<boolean>(false);
@@ -32,7 +33,9 @@ const SearchBox = function SearchBox() {
           <div className="relative">
             <div className="absolute w-full bg-(--weak-foreground) max-h-[400px] overflow-y-scroll z-11 rounded-b-sm">
               {showQuery.isLoading || (focused && searchQueryDebouncedValue == "") ? (
-                <div className={"text-lg flex items-center justify-center h-[100px] text-center"}>...</div>
+                <div className={"text-lg flex items-center justify-center h-[100px] text-center"}>
+                  <Loading className="w-8" />
+                </div>
               ) : showQuery.isError ? (
                 <div className="flex items-center justify-center h-[100px] text-center">Oops, something went wrong. Please try again.</div>
               ) : showQuery.isSuccess && showQuery.data.length !== 0 ? (

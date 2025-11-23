@@ -19,7 +19,7 @@ export default function HeaderBar({ hideSearch }: { hideSearch?: boolean }) {
     <div className="sticky -top-10 z-10">
       <nav
         className={clsx(
-          "absolute flex justify-between items-center w-full py-5 px-22 transition-[backdrop-filter, background-color] duration-0 top-[39px]",
+          "absolute flex justify-between items-center w-full py-5 px-22 transition-[backdrop-filter,background-color] duration-0 top-[39px]",
           { "backdrop-blur-md bg-[#17171760] duration-500": isStuck }
         )}
         ref={navRef}
