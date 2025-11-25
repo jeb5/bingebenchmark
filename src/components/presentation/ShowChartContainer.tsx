@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
-import { TVShow } from "../../lib/tv_show/types";
-import Button from "../elements/Button";
+import { TVShow } from "@/lib/tv_show/types";
+import Button from "@/components/elements/Button";
 import CheckboxWithLabel from "../elements/CheckboxWithLabel";
 import ShowChart from "@/components/ShowChart";
-import styles from "./ShowChartContainer.module.css";
 
 export default function ShowChartContainer({ showDetails }: { showDetails: TVShow }) {
   const handleViewLargerClick = () => {
@@ -18,12 +17,12 @@ export default function ShowChartContainer({ showDetails }: { showDetails: TVSho
   const [showSeasonTrendlines, setShowSeasonTrendlines] = useState(showVerdictKnown);
   const [showOverallTrendline, setShowOverallTrendline] = useState(showVerdictKnown);
   return (
-    <div className={styles.showChartContainer}>
-      <ShowChart showDetails={showDetails} className={styles.chart} {...{ showOverallTrendline, showSeasonTrendlines }} />
-      <div className={styles.chartControls}>
+    <div className="h-full flex flex-col">
+      <ShowChart showDetails={showDetails} className="grow" {...{ showOverallTrendline, showSeasonTrendlines }} />
+      <div className="mt-7.5 flex gap-2.5">
         <CheckboxWithLabel label="Show Season Trendlines" checked={showSeasonTrendlines} setChecked={setShowSeasonTrendlines} />
         <CheckboxWithLabel label="Show Overall Trendline" checked={showOverallTrendline} setChecked={setShowOverallTrendline} />
-        <Button className={styles.viewLargerBtn} text="View larger" onClick={handleViewLargerClick} />
+        <Button className="ml-auto" text="View larger" onClick={handleViewLargerClick} />
       </div>
     </div>
   );

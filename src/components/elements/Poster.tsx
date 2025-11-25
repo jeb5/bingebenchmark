@@ -23,7 +23,7 @@ export default function Poster({
     <Image
       src={error ? transpixel : posterURL}
       alt={showName ? `${showName} poster` : ""}
-      className={clsx("max-w-none showPoster object-cover rounded-[3px] bg-(--strong-foreground)", className)}
+      className={clsx("max-w-none object-cover rounded-[3px] bg-(--strong-foreground)", className)}
       style={{
         width: posterWidth,
         height: posterWidth * (3 / 2),

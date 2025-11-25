@@ -38,7 +38,7 @@ export default async function discover(type: keyof typeof discoverTypes): Promis
 
 	const searchResults = await tmdb.discover.tvShow({ language: "en-US", page: 1, ...discoverTypes[type]() });
 
-	//TODO: remove "The D'Amelio Show" because it appears to have over-inflated ratings (which don't match IMDB)???
+	//TODO: remove "The D'Amelio Show" because it appears to have over-inflated ratings (which don't match IMDB) maybe???
 
 	return cleanupShows(searchResults.results);
 }
