@@ -1,5 +1,5 @@
 import knex from "./database";
-import { MovieDb, ShowResponse, TvExternalIdsResponse } from "moviedb-promise";
+import { ExternalIds, TMDB, TvShowDetails } from "tmdb-ts";
 import { ShowDetails } from "./types";
 
 type tmdbDBShowInfo = {
@@ -8,7 +8,6 @@ type tmdbDBShowInfo = {
 	popularity: number;
 };
 
-type TMDBShow = ShowResponse & { external_ids: TvExternalIdsResponse } & { tagline?: string };
 
 type ValidTMDBShow = {
 	id: number;
@@ -38,20 +37,16 @@ export async function fetchTmdbIdByOriginalName(originalShowName: string) {
 	return result?.id ?? null;
 }
 
-const tmdb = new MovieDb(process.env.TMDB_API_KEY!);
+export const tmdb = new TMDB(process.env.TMDB_READ_ACCESS_TOKEN!);
 
 export async function fetchTmdbDetails(tmdbID: string) {
-	const result = await tmdb.tvInfo({ id: tmdbID, append_to_response: "external_ids" });
-	const tmdbShow = result as TMDBShow;
 
-	if (isValidTMDBShow(tmdbShow)) {
-		return transformTMDBShow(tmdbShow);
-	} else {
-		throw new Error("Invalid TMDB response");
-	}
+	const tmdbShow: TvShowDetails & { external_ids: Omit<ExternalIds, "id">; } = await tmdb.tvShows.details(Number(tmdbID), ["external_ids"]);
+
+	return transformTMDBShow(tmdbShow);
 }
 
-function transformTMDBShow(tmdbShow: ValidTMDBShow): ShowDetails {
+function transformTMDBShow(tmdbShow: TvShowDetails & { external_ids: Omit<ExternalIds, "id">; }): ShowDetails {
 	return {
 		tmdb_id: tmdbShow.id.toString(),
 		imdb_id: tmdbShow.external_ids.imdb_id,
@@ -70,20 +65,4 @@ function transformTMDBShow(tmdbShow: ValidTMDBShow): ShowDetails {
 			twitter_link: tmdbShow.external_ids.imdb_id ? `https://twitter.com/${tmdbShow.external_ids.twitter_id}` : null,
 		},
 	};
-}
-
-function isValidTMDBShow(tmdbShow: TMDBShow): tmdbShow is ValidTMDBShow {
-	return (
-		typeof tmdbShow.id === "number" &&
-		typeof tmdbShow.name === "string" &&
-		typeof tmdbShow.overview === "string" &&
-		typeof tmdbShow.first_air_date === "string" &&
-		typeof tmdbShow.poster_path === "string" &&
-		Array.isArray(tmdbShow.genres) &&
-		typeof tmdbShow.status === "string" &&
-		(tmdbShow.tagline === undefined || typeof tmdbShow.tagline === "string") &&
-		typeof tmdbShow.number_of_episodes === "number" &&
-		(tmdbShow.external_ids.imdb_id === null || typeof tmdbShow.external_ids.imdb_id === "string") &&
-		(tmdbShow.external_ids.twitter_id === null || typeof tmdbShow.external_ids.twitter_id === "string")
-	);
 }

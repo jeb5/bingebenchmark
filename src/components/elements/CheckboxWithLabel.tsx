@@ -9,7 +9,7 @@ export default function CheckboxWithLabel({
 	setChecked: (checked: boolean) => void;
 }) {
 	return (
-    <label className="text-xs">
+    <label className="text-xs select-none">
       <input
         className="w-3 h-3 mr-1.5 accent-(--signature-blue)"
         type="checkbox"

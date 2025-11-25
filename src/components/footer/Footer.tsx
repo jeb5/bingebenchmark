@@ -3,8 +3,36 @@ import TMDBLogoSVG from "@/assets/brand/TMDB.svg";
 import TRAKTLogoSVG from "@/assets/brand/TRAKT.svg";
 import EmailIconSVG from "@/assets/icons/email.svg";
 import GithubIconSVG from "@/assets/icons/github-mark.svg";
+import InfoIconSVG from "@/assets/icons/information-circle.svg";
+import Link from "next/link";
 
 export default function Footer() {
+  return (
+    <div className="bg-(--weak-background) flex justify-between items-end px-10 py-6">
+      <div className="flex">
+        <a href="mailto:gala_porter_04@icloud.com" className="flex mr-5">
+          <EmailIconSVG className="w-3.5 mr-1.5 **:fill-(--signature-offwhite)!" />
+          <div className="text-xs font-bold">Contact</div>
+        </a>
+        <a href="https://github.com/jeb5/bingebenchmark" className="flex mr-5">
+          <GithubIconSVG className="w-3.5 mr-1.5 **:fill-(--signature-offwhite)!" />
+          <div className="text-xs font-bold">Github</div>
+        </a>
+        <Link href="/about" className="flex">
+          <InfoIconSVG className="w-3.5 mr-1.5 **:fill-(--signature-offwhite)!" />
+          <div className="text-xs font-bold">About</div>
+        </Link>
+      </div>
+      <div className="flex items-center py-1">
+        <a href="https://trakt.tv" className="h-7 w-auto mr-10">
+          <TRAKTLogoSVG className="h-full w-auto **:fill-(--signature-offwhite)!" />
+        </a>
+        <a href="https://tmdb.org" className="h-6 w-auto">
+          <TMDBLogoSVG className="h-full w-auto **:fill-(--signature-offwhite)!" />
+        </a>
+      </div>
+    </div>
+  );
   return (
     <div className="bg-(--weak-background) grid grid-cols-[1fr_auto] grid-rows-[auto_auto] p-20">
       <div className="col-start-1 row-start-1">

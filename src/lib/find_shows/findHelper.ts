@@ -1,13 +1,13 @@
-import { ShowResponse } from "moviedb-promise";
+import { TV } from "tmdb-ts";
 
 export type ShowBrief = { name: string; posterURL: string; year: string; description: string; url: string };
 
 /**
  * Dedupes by original_name, removes shows with missing data
  */
-export function cleanupShows(shows: ShowResponse[]): ShowBrief[] {
+export function cleanupShows(shows: TV[]): ShowBrief[] {
 	const originalNamesSet = new Set();
-	return shows.flatMap((show: ShowResponse) => {
+	return shows.flatMap((show: TV) => {
 		if (
 			originalNamesSet.has(show.original_name) ||
 			!show.name ||
